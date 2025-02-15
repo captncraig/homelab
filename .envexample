@@ -1,0 +1,8 @@
+export OS=linux
+export ROLE=desktop
+export GCLOUD_FM_COLLECTOR_ID=somehostname
+export GCLOUD_RW_API_KEY=topsecret
+export GCLOUD_USER=12345
+export GCLOUD_PROM_PUSH=https://prometheus-us-central1.grafana.net/api/prom/push
+export GCLOUD_FM_URL=https://fleet-management-prod-001.grafana.net
+export HOMEASSIST=true

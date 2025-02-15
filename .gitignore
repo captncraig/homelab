@@ -1,0 +1,4 @@
+.env
+alloy_data
+homeassistant-config
+docker-compose.yaml

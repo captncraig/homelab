@@ -1,0 +1,32 @@
+version: '3'
+services:
+  {{if eq (index .Env "OS") "linux"}}alloy:
+    container_name: alloy
+    volumes:
+      - './config.alloy:/alloy/config.alloy'
+      - './alloy_data/:/var/lib/alloy/data/'
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '12345:12345'
+    image: 'grafana/alloy:v1.6.1'
+    command: 'run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /alloy/config.alloy --stability.level=public-preview'
+    env_file: "./.env"
+  {{- end }}
+  {{if eq (index .Env "HOMEASSIST") "true"}}homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - ./homeassistant-config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+  {{- end }}
+  {{if eq (index .Env "VECNA") "true"}}vecna:
+    container_name: vecna
+    image: "captncraig/5e:0"
+    ports:
+      - '33493:80'
+    restart: unless-stopped
+  {{- end }}

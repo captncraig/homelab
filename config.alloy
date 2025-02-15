@@ -1,0 +1,10 @@
+remotecfg {
+    url = sys.env("GCLOUD_FM_URL")
+    basic_auth {
+        username      = sys.env("GCLOUD_USER")
+        password      = sys.env("GCLOUD_RW_API_KEY")
+    }
+    id             = sys.env("GCLOUD_FM_COLLECTOR_ID")
+    attributes     = {"role" = sys.env("ROLE"), "platform"="docker"}
+    poll_frequency = "30s"
+}
