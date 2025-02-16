@@ -1,6 +1,6 @@
 version: '3'
 services:
-  {{if eq (index .Env "OS") "linux"}}alloy:
+  {{if eq (index .Env "ALLOY") "true"}}alloy:
     container_name: alloy
     volumes:
       - './config.alloy:/alloy/config.alloy'
@@ -13,7 +13,7 @@ services:
     ports:
       - '12345:12345'
     image: 'grafana/alloy:v1.6.1'
-    command: 'run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /alloy/config.alloy --stability.level=public-preview'
+    command: 'run --server.http.listen-addr=0.0.0.0:12345 --stability.level=public-preview --storage.path=/var/lib/alloy/data /alloy/config.alloy '
     env_file: "./.env"
   {{- end }}
   {{if eq (index .Env "HOMEASSIST") "true"}}homeassistant:
